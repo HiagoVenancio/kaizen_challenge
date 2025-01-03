@@ -1,6 +1,6 @@
 package com.example.challenge.data.mapper
 
-import com.example.challenge.data.model.Event
+import com.example.challenge.data.model.EventResponse
 import com.example.challenge.data.model.SportsResponse
 import com.example.challenge.domain.model.Sport
 import com.example.challenge.domain.model.SportEvent
@@ -18,7 +18,7 @@ fun SportsResponse.toDomainModel(): Sport {
     )
 }
 
-fun Event.toDomainModel(): SportEvent {
+fun EventResponse.toDomainModel(): SportEvent {
     val teams = this.eventName.split("-").map { it.trim() }
     return SportEvent(
         id = this.eventId,
