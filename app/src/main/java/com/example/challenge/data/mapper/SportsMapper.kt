@@ -1,17 +1,17 @@
 package com.example.challenge.data.mapper
 
-import com.example.challenge.data.model.EventResponse
-import com.example.challenge.data.model.SportsResponse
-import com.example.challenge.domain.model.Sport
+import com.example.challenge.data.api.model.EventResponse
+import com.example.challenge.data.api.model.SportsResponse
+import com.example.challenge.domain.model.SportModel
 import com.example.challenge.domain.model.SportEvent
 
 
-fun SportsResponse.toDomainModel(): Sport {
-    return Sport(
+fun SportsResponse.toDomainModel(): SportModel {
+    return SportModel(
         id = this.sportId ?: "",
         name = when (this.sportName) {
             is String -> this.sportName
-            is List<*> -> (this.sportName as List<*>).joinToString(", ") { it.toString() }
+            //is List<*> -> (this.sportName as List<*>).joinToString(", ") { it.toString() }
             else -> "Unknown"
         },
         events = this.events?.map { it.toDomainModel() } ?: emptyList()
@@ -29,5 +29,6 @@ fun EventResponse.toDomainModel(): SportEvent {
         remainingTime = 0L
     )
 }
+
 
 

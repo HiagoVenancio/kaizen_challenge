@@ -1,10 +1,9 @@
 package com.example.challenge.ui.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.challenge.data.repository.MainDataRepository
-import com.example.challenge.domain.model.Sport
+import com.example.challenge.domain.model.SportModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -13,8 +12,8 @@ import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
 class MainViewModel(private val repository: MainDataRepository) : ViewModel() {
-    private val _mainData = MutableStateFlow<List<Sport>>(emptyList())
-    val mainData: StateFlow<List<Sport>> = _mainData
+    private val _mainData = MutableStateFlow<List<SportModel>>(emptyList())
+    val mainData: StateFlow<List<SportModel>> = _mainData
 
     private val _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading
@@ -31,7 +30,7 @@ class MainViewModel(private val repository: MainDataRepository) : ViewModel() {
             _isLoading.value = true
             _errorMessage.value = null
             try {
-                _mainData.value = repository.getMainData()
+                _mainData.value = repository.getAllSports()
             } catch (e: SocketTimeoutException) {
                 _errorMessage.value =
                     "The request timed out. Please check your internet connection."
@@ -60,7 +59,7 @@ class MainViewModel(private val repository: MainDataRepository) : ViewModel() {
                 sport.copy(
                     events = sport.events.map { event ->
                         if (event.id == eventId) {
-                            event.copy(isFavorite = !event.isFavorite) // Toggle favorite state
+                            event.copy(isFavorite = !event.isFavorite)
                         } else {
                             event
                         }

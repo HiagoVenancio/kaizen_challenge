@@ -4,14 +4,6 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class Sport(
-    val id: String,
-    val name: String,
-    val events: List<SportEvent> = mutableListOf(),
-    var isExpanded: Boolean = false
-) : Parcelable
-
-@Parcelize
 data class SportEvent(
     val id: String,
     val team1: String,

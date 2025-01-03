@@ -7,11 +7,11 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.challenge.domain.model.Sport
+import com.example.challenge.domain.model.SportModel
 
 @Composable
 fun SectionedList(
-    sports: List<Sport>,
+    sports: List<SportModel>,
     onToggleFavorite: (String, String) -> Unit,
     onToggleExpand: (String) -> Unit
 ) {
