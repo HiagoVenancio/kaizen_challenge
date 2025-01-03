@@ -9,10 +9,10 @@ import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.challenge.domain.model.SportEvent
+import com.example.challenge.domain.model.EventModel
 
 @Composable
-fun EventGrid(events: List<SportEvent>, sportId: String, onItemClick: (String, String) -> Unit) {
+fun EventGrid(events: List<EventModel>, sportId: String, toggleEventClick: (String, String) -> Unit) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(3),
         modifier = Modifier
@@ -30,7 +30,7 @@ fun EventGrid(events: List<SportEvent>, sportId: String, onItemClick: (String, S
             }
 
             EventItem(event = event, onClick = {
-                onItemClick(sportId, event.id)
+                toggleEventClick(sportId, event.id)
             })
         }
     }

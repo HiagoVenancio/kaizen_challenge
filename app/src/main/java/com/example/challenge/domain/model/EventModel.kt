@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class SportEvent(
+data class EventModel(
     val id: String,
     val team1: String,
     val team2: String,

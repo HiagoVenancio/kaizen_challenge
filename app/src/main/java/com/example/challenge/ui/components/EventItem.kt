@@ -22,11 +22,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.challenge.R
-import com.example.challenge.domain.model.SportEvent
+import com.example.challenge.domain.model.EventModel
 import kotlinx.coroutines.delay
 
 @Composable
-fun EventItem(event: SportEvent, onClick: () -> Unit) {
+fun EventItem(event: EventModel, onClick: () -> Unit) {
     val currentTime = System.currentTimeMillis() / 1000
     var remainingTime by remember { mutableLongStateOf(event.startTime - currentTime) }
 

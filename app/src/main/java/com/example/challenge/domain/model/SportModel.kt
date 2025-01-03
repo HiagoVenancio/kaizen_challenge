@@ -11,8 +11,9 @@ import kotlinx.parcelize.Parcelize
 data class SportModel(
     @PrimaryKey val id: String,
     val name: String,
-    val events: List<SportEvent> = mutableListOf(),
-    var isExpanded: Boolean = false
+    val events: List<EventModel> = mutableListOf(),
+    var isExpanded: Boolean = false,
+    var isFavorite: Boolean = false
 ) : Parcelable {
 
     companion object {

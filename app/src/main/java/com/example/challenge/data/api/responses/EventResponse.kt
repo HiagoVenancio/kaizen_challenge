@@ -1,4 +1,4 @@
-package com.example.challenge.data.api.model
+package com.example.challenge.data.api.responses
 
 import com.google.gson.annotations.SerializedName
 

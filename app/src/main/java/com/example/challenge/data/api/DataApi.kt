@@ -1,6 +1,6 @@
 package com.example.challenge.data.api
 
-import com.example.challenge.data.api.model.SportsResponse
+import com.example.challenge.data.api.responses.SportsResponse
 import retrofit2.http.GET
 
 interface DataApi {

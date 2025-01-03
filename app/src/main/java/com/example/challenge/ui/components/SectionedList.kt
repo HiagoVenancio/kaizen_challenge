@@ -12,8 +12,9 @@ import com.example.challenge.domain.model.SportModel
 @Composable
 fun SectionedList(
     sports: List<SportModel>,
-    onToggleFavorite: (String, String) -> Unit,
-    onToggleExpand: (String) -> Unit
+    onToggleFavoriteSection: (SportModel) -> Unit,
+    onToggleFavoriteEvent: (String, String) -> Unit,
+    onToggleExpand: (SportModel) -> Unit
 ) {
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         sports.forEach { sport ->
@@ -22,9 +23,9 @@ fun SectionedList(
                     modifier = Modifier.padding(vertical = 8.dp)
                 ) {
                     SectionHeader(
-                        sportName = sport.name,
-                        isExpanded = sport.isExpanded,
-                        onToggleExpand = { onToggleExpand(sport.id) }
+                        sport = sport,
+                        onToggleExpand = { onToggleExpand(sport) },
+                        onToggleFavoriteSection = { onToggleFavoriteSection(sport) }
                     )
                 }
             }
@@ -34,7 +35,7 @@ fun SectionedList(
                     EventGrid(
                         events = sport.events,
                         sportId = sport.id,
-                        onItemClick = onToggleFavorite
+                        toggleEventClick = onToggleFavoriteEvent
                     )
                 }
             }

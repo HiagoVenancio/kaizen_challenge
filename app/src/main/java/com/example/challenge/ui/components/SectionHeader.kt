@@ -14,9 +14,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.challenge.R
+import com.example.challenge.domain.model.SportModel
 
 @Composable
-fun SectionHeader(sportName: String, isExpanded: Boolean, onToggleExpand: () -> Unit) {
+fun SectionHeader(
+    sport: SportModel,
+    onToggleExpand: () -> Unit,
+    onToggleFavoriteSection: () -> Unit
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -28,7 +33,7 @@ fun SectionHeader(sportName: String, isExpanded: Boolean, onToggleExpand: () -> 
 
         Text(
             style = MaterialTheme.typography.titleLarge,
-            text = sportName,
+            text = sport.name,
             modifier = Modifier
                 .weight(0.9f)
                 .padding(8.dp)
@@ -36,17 +41,17 @@ fun SectionHeader(sportName: String, isExpanded: Boolean, onToggleExpand: () -> 
         )
 
         IconFromDrawable(
-            drawable = R.drawable.star_border,
+            drawable = if (sport.isFavorite) R.drawable.star_filled else R.drawable.star_border,
             modifier = Modifier
                 .size(30.dp)
                 .weight(0.2f)
                 .clickable {
-
+                    onToggleFavoriteSection.invoke()
                 }
         )
 
         IconFromDrawable(
-            if (isExpanded) R.drawable.arrow_up else R.drawable.arrow_down,
+            if (sport.isExpanded) R.drawable.arrow_up else R.drawable.arrow_down,
             modifier = Modifier
                 .size(40.dp)
                 .weight(0.2f)

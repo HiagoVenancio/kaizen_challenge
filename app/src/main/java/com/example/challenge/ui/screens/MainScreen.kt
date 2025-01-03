@@ -62,10 +62,13 @@ fun MainScreen() {
                 else -> {
                     SectionedList(
                         sports = mainData,
-                        onToggleFavorite = { sportId, eventId ->
+                        onToggleFavoriteSection = { sport ->
+                            viewModel.toggleFavoriteSection(sport)
+                        },
+                        onToggleFavoriteEvent = { sportId, eventId ->
                             viewModel.toggleFavoriteEvent(sportId, eventId)
                         },
-                        onToggleExpand = { sportId -> viewModel.toggleExpand(sportId) }
+                        onToggleExpand = { sport -> viewModel.toggleExpand(sport) }
                     )
                 }
             }

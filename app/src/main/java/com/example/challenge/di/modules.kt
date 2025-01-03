@@ -3,7 +3,7 @@ package com.example.challenge.di
 import androidx.room.Room
 import com.example.challenge.data.api.DataApi
 import com.example.challenge.data.dao.AppDatabase
-import com.example.challenge.data.repository.MainDataRepository
+import com.example.challenge.data.repository.SportRepository
 import com.example.challenge.ui.viewmodel.MainViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -36,13 +36,13 @@ val appModule = module {
         Room.databaseBuilder(
             androidContext(),
             AppDatabase::class.java, "sports_database"
-        ).build()
+        ).fallbackToDestructiveMigration().build()
     }
 
     single { get<AppDatabase>().sportsDao() }
-
+    single { get<AppDatabase>().favoritesDao() }
 
     single { get<Retrofit>().create(DataApi::class.java) }
-    single<MainDataRepository> { MainDataRepository(get(), get()) }
+    single<SportRepository> { SportRepository(get(), get()) }
     single { MainViewModel(get()) }
 }
