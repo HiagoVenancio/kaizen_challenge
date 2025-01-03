@@ -12,7 +12,6 @@ data class SportModel(
     @PrimaryKey val id: String,
     val name: String,
     val events: List<EventModel> = mutableListOf(),
-    var isExpanded: Boolean = false,
     var isFavorite: Boolean = false
 ) : Parcelable {
 

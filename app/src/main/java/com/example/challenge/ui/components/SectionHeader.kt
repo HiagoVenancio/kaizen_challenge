@@ -19,15 +19,19 @@ import com.example.challenge.domain.model.SportModel
 @Composable
 fun SectionHeader(
     sport: SportModel,
+    isExpanded: Boolean,
     onToggleExpand: () -> Unit,
     onToggleFavoriteSection: () -> Unit
 ) {
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .background(color = Color.White)
             .padding(8.dp)
-            .clickable { onToggleExpand() },
+            .clickable {
+                onToggleExpand()
+            },
         verticalAlignment = Alignment.CenterVertically
     ) {
 
@@ -51,7 +55,7 @@ fun SectionHeader(
         )
 
         IconFromDrawable(
-            if (sport.isExpanded) R.drawable.arrow_up else R.drawable.arrow_down,
+            if (isExpanded) R.drawable.arrow_up else R.drawable.arrow_down,
             modifier = Modifier
                 .size(40.dp)
                 .weight(0.2f)

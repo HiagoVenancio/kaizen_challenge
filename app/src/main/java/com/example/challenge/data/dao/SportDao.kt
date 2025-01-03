@@ -20,12 +20,10 @@ interface SportDao {
     @Query("UPDATE sports SET isFavorite = :isFavorite WHERE id = :id")
     suspend fun updateFavoriteStatus(id: String, isFavorite: Boolean)
 
-    @Query("UPDATE sports SET isExpanded = :isExpanded WHERE id = :id")
-    suspend fun updateExpadedSection(id: String, isExpanded: Boolean)
-
     @Query("UPDATE sports SET events = :updatedEvents WHERE id = :sportId")
     suspend fun updateSportEvents(sportId: String, updatedEvents: List<EventModel>)
 
     @Query("SELECT * FROM sports WHERE id = :sportId")
     suspend fun getSportById(sportId: String): SportModel
+
 }

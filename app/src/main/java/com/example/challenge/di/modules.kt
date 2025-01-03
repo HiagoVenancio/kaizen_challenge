@@ -40,7 +40,6 @@ val appModule = module {
     }
 
     single { get<AppDatabase>().sportsDao() }
-    single { get<AppDatabase>().favoritesDao() }
 
     single { get<Retrofit>().create(DataApi::class.java) }
     single<SportRepository> { SportRepository(get(), get()) }

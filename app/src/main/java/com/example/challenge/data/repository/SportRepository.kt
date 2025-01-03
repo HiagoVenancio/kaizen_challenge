@@ -6,6 +6,8 @@ import com.example.challenge.data.dao.SportDao
 import com.example.challenge.data.mapper.toDomainModel
 import com.example.challenge.domain.model.SportModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
 @SuppressLint("NewApi")
@@ -19,17 +21,18 @@ class SportRepository(private val api: DataApi, private val sportsDao: SportDao)
 
     fun getAllSports() = sportsDao.getSports()
 
-    suspend fun toggleFavoriteSection(sports: SportModel) = withContext(Dispatchers.IO) {
-        try {
-            sportsDao.updateFavoriteStatus(sports.id, !sports.isFavorite)
-        } catch (e: Exception) {
-            e.printStackTrace()
+    fun getFavoriteItems(): Flow<List<SportModel>> = sportsDao.getSports().map { sports ->
+        sports.mapNotNull { sport ->
+            val favoriteEvents = sport.events.filter { it.isFavorite }
+            if (favoriteEvents.isNotEmpty()) {
+                sport.copy(events = favoriteEvents)
+            } else null
         }
     }
 
-    suspend fun toggleSectionExpand(sports: SportModel) = withContext(Dispatchers.IO) {
+    suspend fun toggleFavoriteSection(sports: SportModel) = withContext(Dispatchers.IO) {
         try {
-            sportsDao.updateExpadedSection(sports.id, !sports.isExpanded)
+            sportsDao.updateFavoriteStatus(sports.id, !sports.isFavorite)
         } catch (e: Exception) {
             e.printStackTrace()
         }

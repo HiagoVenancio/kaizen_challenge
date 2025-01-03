@@ -8,16 +8,21 @@ import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
+import com.example.challenge.ui.screens.FavoriteScreen
 import com.example.challenge.ui.screens.MainScreen
+import com.example.challenge.ui.viewmodel.MainViewModel
 import com.google.accompanist.navigation.animation.AnimatedNavHost
+import org.koin.androidx.compose.koinViewModel
 
 sealed class Screen(val route: String) {
     object MainScreen : Screen("main_screen")
+    object FavoriteScreen : Screen("favorites")
 }
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun AppNavigation(navController: NavHostController) {
+    val viewModel: MainViewModel = koinViewModel()
 
     AnimatedNavHost(
         navController = navController,
@@ -28,7 +33,11 @@ fun AppNavigation(navController: NavHostController) {
         popExitTransition = { slideOutHorizontally(targetOffsetX = { it }) + fadeOut() }
     ) {
         composable(Screen.MainScreen.route) {
-            MainScreen()
+            MainScreen(navController, viewModel)
+        }
+
+        composable(Screen.FavoriteScreen.route) {
+            FavoriteScreen(navController, viewModel)
         }
     }
 }

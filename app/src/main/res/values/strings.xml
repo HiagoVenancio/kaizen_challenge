@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Challenge</string>
     <string name="main_title">Sports</string>
-    <string name="detail_title">Details</string>
+    <string name="farovite_title">Favorites</string>
     <string name="unknown_error">An unexpected error occurred. Please try again.</string>
     <string name="refresh">Refresh</string>
     <string name="favorite">Favorite</string>

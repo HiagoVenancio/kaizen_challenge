@@ -14,8 +14,10 @@ import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
 class MainViewModel(private val repository: SportRepository) : ViewModel() {
-
     val mainData: StateFlow<List<SportModel>> = repository.getAllSports()
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+
+    val favoriteItems: StateFlow<List<SportModel>> = repository.getFavoriteItems()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
     private val _isLoading = MutableStateFlow(false)
@@ -47,12 +49,6 @@ class MainViewModel(private val repository: SportRepository) : ViewModel() {
             } finally {
                 _isLoading.value = false
             }
-        }
-    }
-
-    fun toggleExpand(sport: SportModel) {
-        viewModelScope.launch {
-            repository.toggleSectionExpand(sport)
         }
     }
 
