@@ -4,18 +4,30 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.challenge.data.repository.SportRepository
 import com.example.challenge.domain.model.SportModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import java.io.IOException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class MainViewModel(private val repository: SportRepository) : ViewModel() {
-    val mainData: StateFlow<List<SportModel>> = repository.getAllSports()
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+    private val _isFilterActive = MutableStateFlow(false)
+    val isFilterActive: StateFlow<Boolean> = _isFilterActive
+
+    val filteredData: StateFlow<List<SportModel>> =
+        _isFilterActive.flatMapLatest { isFilterActive ->
+            if (isFilterActive) {
+                repository.getFavoriteSportsSections()
+            } else {
+                repository.getAllSports()
+            }
+        }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
     val favoriteItems: StateFlow<List<SportModel>> = repository.getFavoriteItems()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
@@ -62,6 +74,14 @@ class MainViewModel(private val repository: SportRepository) : ViewModel() {
         viewModelScope.launch {
             repository.updateSportEvents(sportId, eventId)
         }
+    }
+
+    fun filterFavoriteSports(): List<SportModel> {
+        return favoriteItems.value.filter { it.isFavorite }
+    }
+
+    fun toggleFilter() {
+        _isFilterActive.value = !_isFilterActive.value
     }
 
 }

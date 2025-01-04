@@ -1,5 +1,6 @@
 package com.example.challenge.ui.components
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
@@ -7,11 +8,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.example.challenge.R
 import com.example.challenge.domain.model.SportModel
@@ -23,13 +26,18 @@ fun SectionHeader(
     onToggleExpand: () -> Unit,
     onToggleFavoriteSection: () -> Unit
 ) {
-
+    val context = LocalContext.current
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .background(color = Color.White)
             .padding(8.dp)
             .clickable {
+                if (isExpanded.not() && sport.events.isEmpty()) {
+                    Toast
+                        .makeText(context, "No events available", Toast.LENGTH_SHORT)
+                        .show()
+                }
                 onToggleExpand()
             },
         verticalAlignment = Alignment.CenterVertically
@@ -41,17 +49,11 @@ fun SectionHeader(
             modifier = Modifier
                 .weight(0.9f)
                 .padding(8.dp)
-
         )
 
-        IconFromDrawable(
-            drawable = if (sport.isFavorite) R.drawable.star_filled else R.drawable.star_border,
-            modifier = Modifier
-                .size(30.dp)
-                .weight(0.2f)
-                .clickable {
-                    onToggleFavoriteSection.invoke()
-                }
+        Switch(
+            checked = sport.isFavorite,
+            onCheckedChange = { onToggleFavoriteSection.invoke() }
         )
 
         IconFromDrawable(

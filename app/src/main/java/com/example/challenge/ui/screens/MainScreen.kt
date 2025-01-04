@@ -34,9 +34,10 @@ import com.example.challenge.ui.viewmodel.MainViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(navController: NavHostController, viewModel: MainViewModel) {
-    val mainData by viewModel.mainData.collectAsState()
+    val mainData by viewModel.filteredData.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
     val errorMessage by viewModel.errorMessage.collectAsState()
+    val isFilterActive by viewModel.isFilterActive.collectAsState()
 
     Scaffold(
         topBar = {
@@ -45,11 +46,24 @@ fun MainScreen(navController: NavHostController, viewModel: MainViewModel) {
                 actions = {
                     Row {
                         IconFromDrawable(
+                            if (isFilterActive) R.drawable.filter_list_off else R.drawable.filter_list,
+                            tintColor = MaterialTheme.colorScheme.tertiary,
+                            modifier = Modifier
+                                .size(30.dp)
+                                .clickable {
+                                    viewModel.toggleFilter()
+                                }
+                        )
+                        Spacer(modifier = Modifier.padding(horizontal = 10.dp))
+
+                        IconFromDrawable(
                             R.drawable.star_filled,
                             tintColor = MaterialTheme.colorScheme.tertiary,
-                            modifier = Modifier.size(30.dp).clickable {
-                                navController.navigate(Screen.FavoriteScreen.route)
-                            }
+                            modifier = Modifier
+                                .size(30.dp)
+                                .clickable {
+                                    navController.navigate(Screen.FavoriteScreen.route)
+                                }
                         )
                         Spacer(modifier = Modifier.padding(horizontal = 10.dp))
                     }

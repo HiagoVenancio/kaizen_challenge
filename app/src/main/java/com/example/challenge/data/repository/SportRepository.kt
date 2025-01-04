@@ -21,6 +21,10 @@ class SportRepository(private val api: DataApi, private val sportsDao: SportDao)
 
     fun getAllSports() = sportsDao.getSports()
 
+    fun getFavoriteSportsSections(): Flow<List<SportModel>> = sportsDao.getSports().map { sports ->
+        sports.filter { it.isFavorite }
+    }
+
     fun getFavoriteItems(): Flow<List<SportModel>> = sportsDao.getSports().map { sports ->
         sports.mapNotNull { sport ->
             val favoriteEvents = sport.events.filter { it.isFavorite }
