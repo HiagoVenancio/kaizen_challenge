@@ -7,22 +7,25 @@ import com.example.challenge.domain.model.EventModel
 
 
 fun SportsResponse.toDomainModel(): SportModel {
+    val name = when (this.sportName) {
+        is String -> this.sportName
+        else -> "Unknown"
+    }
     return SportModel(
         id = this.sportId ?: "",
-        name = when (this.sportName) {
-            is String -> this.sportName
-            else -> "Unknown"
-        },
-        events = this.events?.map { it.toDomainModel() } ?: emptyList()
+        name = name,
+        events = this.events?.map { it.toDomainModel(name) } ?: emptyList()
     )
 }
 
-fun EventResponse.toDomainModel(): EventModel {
+fun EventResponse.toDomainModel(eventName: String): EventModel {
     val teams = this.eventName.split("-").map { it.trim() }
     return EventModel(
         id = this.eventId,
-        team1 = teams.getOrNull(0) ?: "Unknown",
-        team2 = teams.getOrNull(1) ?: "Unknown",
+        sportId = this.sportId,
+        sportName = eventName,
+        team1 = teams.getOrNull(0) ?: "",
+        team2 = teams.getOrNull(1) ?: "",
         startTime = this.eventStartTime,
         isFavorite = false,
         remainingTime = 0L

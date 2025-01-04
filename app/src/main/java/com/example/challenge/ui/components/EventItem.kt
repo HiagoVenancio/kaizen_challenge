@@ -26,7 +26,7 @@ import com.example.challenge.domain.model.EventModel
 import kotlinx.coroutines.delay
 
 @Composable
-fun EventItem(event: EventModel, onClick: () -> Unit) {
+fun EventItem(event: EventModel, onClick: () -> Unit, isFromFavorite: Boolean = false) {
     val currentTime = System.currentTimeMillis() / 1000
     var remainingTime by remember { mutableLongStateOf(event.startTime - currentTime) }
 
@@ -76,6 +76,14 @@ fun EventItem(event: EventModel, onClick: () -> Unit) {
             )
 
             TextSingleLine(value = event.team2)
+
+            if (isFromFavorite) {
+                Spacer(modifier = Modifier.padding(4.dp))
+                TextSingleLineBackground(
+                    value = event.sportName,
+                    MaterialTheme.colorScheme.secondary
+                )
+            }
         }
     }
 }

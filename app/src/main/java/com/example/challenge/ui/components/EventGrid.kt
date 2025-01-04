@@ -22,13 +22,9 @@ fun EventGrid(events: List<EventModel>, sportId: String, toggleEventClick: (Stri
         horizontalArrangement = Arrangement.spacedBy(4.dp)
     ) {
         itemsIndexed(events) { index, event ->
-            //Creating a fake date for the first 3 items
             when (index) {
-                0 -> event.startTime = 1735934160
-                1 -> event.startTime = 1736034160
-                2 -> event.startTime = 1736134160
+                0 -> event.startTime = 1736134160
             }
-
             EventItem(event = event, onClick = {
                 toggleEventClick(sportId, event.id)
             })
