@@ -12,12 +12,13 @@ import androidx.compose.ui.unit.dp
 fun IconFromDrawable(
     drawable: Int,
     modifier: Modifier = Modifier.size(25.dp),
-    tintColor: Color = Color.Black
+    tintColor: Color = Color.Black,
+    contentDescription: String = ""
 ) {
     Icon(
         modifier = modifier,
         painter = painterResource(id = drawable),
-        contentDescription = "",
+        contentDescription = contentDescription,
         tint = tintColor
     )
 }

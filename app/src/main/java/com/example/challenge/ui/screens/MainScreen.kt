@@ -52,7 +52,8 @@ fun MainScreen(navController: NavHostController, viewModel: MainViewModel) {
                                 .size(30.dp)
                                 .clickable {
                                     viewModel.toggleFilter()
-                                }
+                                },
+                            contentDescription = "Filter"
                         )
                         Spacer(modifier = Modifier.padding(horizontal = 10.dp))
 

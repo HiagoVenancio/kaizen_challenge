@@ -39,6 +39,17 @@ android {
     buildFeatures {
         compose = true
     }
+    packaging {
+        resources {
+            excludes += "META-INF/LICENSE-notice.md"
+            excludes += "META-INF/LICENSE.md"
+            excludes += "META-INF/NOTICE.md"
+            excludes += "META-INF/DEPENDENCIES"
+            excludes += "META-INF/LICENSE.md"
+            excludes += "META-INF/LICENSE"
+            excludes += "META-INF/NOTICE"
+        }
+    }
 }
 
 dependencies {
@@ -76,14 +87,14 @@ dependencies {
     kapt(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
 
-/*    testImplementation("org.mockito:mockito-core:4.8.0")
-    testImplementation("org.mockito.kotlin:mockito-kotlin:4.1.0")
-    testImplementation("org.mockito:mockito-inline:4.8.0")*/
-    testImplementation("io.mockk:mockk:1.13.3")
+    testImplementation(libs.mockk)
+    androidTestImplementation(libs.mockk.mockk.android)
 
-    testImplementation("androidx.arch.core:core-testing:2.1.0")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
+    testImplementation(libs.androidx.core.testing)
+    testImplementation(libs.kotlinx.coroutines.test)
 
-
+    androidTestImplementation(libs.ui.test.junit4)
+    debugImplementation(libs.ui.tooling)
+    debugImplementation(libs.ui.test.manifest)
 
 }
