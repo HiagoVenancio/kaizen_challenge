@@ -43,11 +43,19 @@ fun SectionHeader(
         verticalAlignment = Alignment.CenterVertically
     ) {
 
+        IconFromDrawable(
+            R.drawable.place_holder_icon_sport ,
+            modifier = Modifier
+                .size(40.dp)
+                .weight(0.1f),
+            tintColor = MaterialTheme.colorScheme.primary
+        )
+
         Text(
             style = MaterialTheme.typography.titleLarge,
             text = sport.name,
             modifier = Modifier
-                .weight(0.9f)
+                .weight(0.8f)
                 .padding(8.dp)
         )
 

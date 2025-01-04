@@ -47,7 +47,7 @@ fun MainScreen(navController: NavHostController, viewModel: MainViewModel) {
                     Row {
                         IconFromDrawable(
                             if (isFilterActive) R.drawable.filter_list_off else R.drawable.filter_list,
-                            tintColor = MaterialTheme.colorScheme.tertiary,
+                            tintColor = MaterialTheme.colorScheme.primary,
                             modifier = Modifier
                                 .size(30.dp)
                                 .clickable {
@@ -59,7 +59,7 @@ fun MainScreen(navController: NavHostController, viewModel: MainViewModel) {
 
                         IconFromDrawable(
                             R.drawable.star_filled,
-                            tintColor = MaterialTheme.colorScheme.tertiary,
+                            tintColor = MaterialTheme.colorScheme.primary,
                             modifier = Modifier
                                 .size(30.dp)
                                 .clickable {
