@@ -2,6 +2,7 @@ package com.example.challenge.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.challenge.data.repository.ISportRepository
 import com.example.challenge.data.repository.SportRepository
 import com.example.challenge.domain.model.SportModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -16,7 +17,7 @@ import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class MainViewModel(private val repository: SportRepository) : ViewModel() {
+class MainViewModel(private val repository: ISportRepository) : ViewModel() {
     private val _isFilterActive = MutableStateFlow(false)
     val isFilterActive: StateFlow<Boolean> = _isFilterActive
 

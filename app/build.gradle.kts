@@ -75,4 +75,15 @@ dependencies {
     //noinspection KaptUsageInsteadOfKsp
     kapt(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
+
+/*    testImplementation("org.mockito:mockito-core:4.8.0")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:4.1.0")
+    testImplementation("org.mockito:mockito-inline:4.8.0")*/
+    testImplementation("io.mockk:mockk:1.13.3")
+
+    testImplementation("androidx.arch.core:core-testing:2.1.0")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
+
+
+
 }

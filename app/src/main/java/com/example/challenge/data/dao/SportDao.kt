@@ -18,7 +18,7 @@ interface SportDao {
     suspend fun insertAll(sports: List<SportModel>)
 
     @Query("UPDATE sports SET isFavorite = :isFavorite WHERE id = :id")
-    suspend fun updateFavoriteStatus(id: String, isFavorite: Boolean)
+    suspend fun updateFavoriteSection(id: String, isFavorite: Boolean)
 
     @Query("UPDATE sports SET events = :updatedEvents WHERE id = :sportId")
     suspend fun updateSportEvents(sportId: String, updatedEvents: List<EventModel>)
