@@ -21,3 +21,7 @@
 - API: [https://mockapi.io/](https://618d3aa7fe09aa001744060a.mockapi.io/api/sports)
 
 ---
+How it looks:
+
+---
+PS: It seems that all timers is out of date, because of that, I created a hardcoded timestamp so for the counter can be seen working.
