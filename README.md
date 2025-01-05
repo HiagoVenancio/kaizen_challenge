@@ -22,4 +22,7 @@
 
 ---
 
-PS: It seems that all timers is out of date, so it wont have the timer decreasing, but was implemented.
+PS: 
+
+- It seems that all timers is out of date, so it wont have the timer decreasing, but was implemented.
+- If the API had an icon for the sports, I would have displayed it.
