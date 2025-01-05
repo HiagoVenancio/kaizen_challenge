@@ -77,10 +77,6 @@ class MainViewModel(private val repository: ISportRepository) : ViewModel() {
         }
     }
 
-    fun filterFavoriteSports(): List<SportModel> {
-        return favoriteItems.value.filter { it.isFavorite }
-    }
-
     fun toggleFilter() {
         _isFilterActive.value = !_isFilterActive.value
     }

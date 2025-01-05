@@ -64,9 +64,6 @@ fun FavoriteScreen(navController: NavHostController, viewModel: MainViewModel) {
                 val favoriteEvents = favorites.flatMap { it.events }.filter { it.isFavorite }
 
                 itemsIndexed(favoriteEvents) { index, event ->
-                    when (index) {
-                        0 -> event.startTime = 1736134160
-                    }
                     EventItem(event = event, onClick = {
                         viewModel.toggleFavoriteEvent(event.sportId, event.id)
                     }, isFromFavorite = true)

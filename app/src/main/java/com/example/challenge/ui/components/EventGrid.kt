@@ -22,9 +22,6 @@ fun EventGrid(events: List<EventModel>, sportId: String, toggleEventClick: (Stri
         horizontalArrangement = Arrangement.spacedBy(4.dp)
     ) {
         itemsIndexed(events) { index, event ->
-            when (index) {
-                0 -> event.startTime = 1736134160
-            }
             EventItem(event = event, onClick = {
                 toggleEventClick(sportId, event.id)
             })
